@@ -1,6 +1,8 @@
 import pygame
 from sys import exit
 import Player
+
+#inintitate pygame siupses
 pygame.init()
 w_WIDTH = 1000
 w_HEIGHT = 500
@@ -11,6 +13,7 @@ ground.fill("Green")
 ground_rect = ground.get_rect(topleft=(0, 350))
 # huj
 player = Player.Player(20, 40, screen, ground_rect.y)
+
 
 while True:
     screen.fill("Black")
