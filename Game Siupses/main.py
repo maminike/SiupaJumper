@@ -2,16 +2,21 @@ import pygame
 from sys import exit
 import Player
 
-#inintitate pygame siupses
+# inintitate pygame siupses
 pygame.init()
+
+# screen stuff
 w_WIDTH = 1000
 w_HEIGHT = 500
 screen = pygame.display.set_mode((w_WIDTH, w_HEIGHT))
+
 clock = pygame.time.Clock()
+
+# ground
 ground = pygame.Surface((w_WIDTH, w_HEIGHT/5))
 ground.fill("Green")
 ground_rect = ground.get_rect(topleft=(0, 350))
-# huj
+# player
 player = Player.Player(20, 40, screen, ground_rect.y)
 
 
