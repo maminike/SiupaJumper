@@ -12,27 +12,41 @@ class Player:
         self.resp_y = resp_height
         self.gravity = 0
         self.p_speed = p_speed
-        self.isOnGround = True
+        self.onGround = 0
+        self.isCrouching = 0
+        self.isJumping = 0
 
     def update(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_d]:
-            self.rectangle.centerx += 10
-        if keys[pygame.K_a]:
-            self.rectangle.centerx -= 10
+        if not self.isJumping:
+            if keys[pygame.K_d]:
+                self.rectangle.centerx += 10
+            if keys[pygame.K_a]:
+
+                self.rectangle.centerx -= 10
 
         # generalnie grav musi być przed jump już nie pamiętam dla czego
         self.grav()
         self.jump(keys)
 
+        #print("Crouch: "+ str(self.isCrouching))
+        #print("Ground: " + str(self.onGround))
+        print("Jumping: " + str(self.isJumping))
         self.screen.blit(self.surface, self.rectangle)
 
     def jump(self, keys):
         # jumpington
         if keys[pygame.K_w]:
             # jeżeli w jest klikniete to sie charguje siła skoka
-            self.jump_force += 1
+            self.isJumping = False
+            self.isCrouching = True
+            self.onGround = True
+            if self.jump_force <= 25:
+                self.jump_force += 0.75
         elif self.jump_force != 0:
+            self.isCrouching = False
+            self.isJumping = True
+            self.onGround = False
             # jeżeli jumping force jest fajny to dopiero nakurwia
             self.gravity = -1 * self.jump_force  # zamianka jumping forca na ujemny żeby grawitacja działała odwrotnie łot
             self.jump_force = 0  # niesamowity świat chuja/ zerowanie forca skoka
@@ -49,7 +63,7 @@ class Player:
         if self.rectangle.y + self.rectangle.height >= self.resp_y and self.gravity >= 0:
             self.gravity = 0
         # print(self.gravity)  # możesz zobaczyć jak ta grawitacja siupuje
-
+            self.onGround = True
+            self.isJumping = False
         # tutaj dokonuje sie spadanie(lub skakanie(srakanie hahaha)) właściwe, po prostu dodaje sie grawitacja do y
         self.rectangle.y += self.gravity
-
