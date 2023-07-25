@@ -19,22 +19,21 @@ class Player:
 
     def update(self):
         keys = pygame.key.get_pressed()
-        if not self.isJumping and not self.isCrouching:
+        if not self.isJumping and not self.isCrouching and self.onGround:
             if keys[pygame.K_d]:
-                self.rectangle.centerx += 10
+                self.rectangle.centerx += 5
             if keys[pygame.K_a]:
-                self.rectangle.centerx -= 10
+                self.rectangle.centerx -= 5
 
         # generalnie grav musi być przed jump już nie pamiętam dla czego
         self.grav()
         self.jump(keys)
+        print(self.isJumping)
         if not self.onGround:
             self.rectangle.x += self.direction_force
+            self.isJumping = True
 
-        # print("Crouch: "+ str(self.isCrouching))
-        # print("Ground: " + str(self.onGround))
 
-        print("Jumping: " + str(self.isJumping))
         self.screen.blit(self.surface, self.rectangle)
 
     def jump(self, keys):
@@ -63,6 +62,8 @@ class Player:
         self.gravity += 1
 
         if self.rectangle.y + self.rectangle.height >= self.resp_y and self.gravity >= 0:
+
+            self.rectangle.bottom =  self.resp_y
             self.gravity = 0
             # print(self.gravity)  # możesz zobaczyć jak ta grawitacja siupuje
             self.onGround = True

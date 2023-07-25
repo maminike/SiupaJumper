@@ -1,7 +1,7 @@
 import pygame
 from sys import exit
 import Player
-
+import Platform
 # inintitate pygame siupses
 pygame.init()
 
@@ -19,6 +19,9 @@ ground_rect = ground.get_rect(topleft=(0, 350))
 # player
 player = Player.Player(20, 40, screen, ground_rect.y)
 
+platform = Platform.Platform(360, 100, 100, 100, 20, screen)
+
+
 
 while True:
     screen.fill("Black")
@@ -28,6 +31,9 @@ while True:
     keys = pygame.key.get_pressed()
 
     screen.blit(ground, ground_rect)
+
     player.update()
+    platform.colide(player)
+    platform.platform_blit()
     clock.tick(60)
     pygame.display.update()
