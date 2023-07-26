@@ -19,7 +19,7 @@ class Player:
 
     def update(self):
         keys = pygame.key.get_pressed()
-        if not self.isJumping and not self.isCrouching and self.onGround:
+        if not self.isJumping and self.onGround and not self.isCrouching:
             if keys[pygame.K_d]:
                 self.rectangle.centerx += 5
             if keys[pygame.K_a]:
@@ -28,7 +28,7 @@ class Player:
         # generalnie grav musi być przed jump już nie pamiętam dla czego
         self.grav()
         self.jump(keys)
-        print(self.isJumping)
+        #print(self.isJumping)
         if not self.onGround:
             self.rectangle.x += self.direction_force
             self.isJumping = True
