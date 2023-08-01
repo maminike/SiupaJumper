@@ -51,11 +51,12 @@ class Player:
             if keys[p.K_a]:
                 self.rectangle.centerx -= 5
                 #print(self.direction_force)
+        print(self.gravity)
         self.screen.blit(self.surface, self.rectangle)
 
     def jump(self, keys):
         # jumpington
-        if keys[p.K_SPACE] and self.onGround:
+        if keys[p.K_SPACE] and self.onGround and (self.gravity == 0 or self.gravity == 1):
             # jeżeli w jest klikniete to sie charguje siła skoka
             self.isJumping = False
             self.isCrouching = True

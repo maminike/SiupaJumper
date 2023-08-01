@@ -45,7 +45,6 @@ class Platform:
                     player.rectangle.right = self.rectangle.left
                     player.direction_force = -3
         if self.rectangle.colliderect(rect_y):
-            i = 0
             #if rect_y.top <= self.rectangle.bottom and self.rectangle.bottom + 10 < player.rectangle.bottom:
             if player.gravity < 0:
                 #print(player.rectangle.top)
@@ -62,34 +61,3 @@ class Platform:
                 player.onGround = True
                 player.isJumping = False
 
-
-
-
-
-            ''''
-            if player.rectangle.bottom > self.rectangle.top:
-
-                if abs(player.rectangle.left - self.rectangle.right) < 20:
-                    player.rectangle.left = self.rectangle.right
-                    player.direction_force = 3
-                    player.isJumping = True
-                    player.onGround = False
-
-                if abs(player.rectangle.right - self.rectangle.left) < 20:
-                    player.rectangle.right = self.rectangle.left
-                    player.direction_force = -3
-                    player.isJumping = True
-                    player.onGround = False
-
-                if abs(player.rectangle.top - self.rectangle.bottom) < 20:
-                    player.rectangle.top = self.rectangle.bottom
-                    player.gravity = 0
-                    player.isJumping = True
-                    player.onGround = False
-                # todo gracz jak spada to jakby nie jest w skoku i przez to może się poruszać normalnie w locie
-                if abs(player.rectangle.bottom - self.rectangle.top) < 10:
-                    player.rectangle.bottom = self.rectangle.top
-                    player.gravity = 0
-                    player.onGround = True
-                    player.isJumping = False
-                '''
