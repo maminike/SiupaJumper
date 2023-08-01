@@ -19,11 +19,12 @@ ground_rect = ground.get_rect(topleft=(0, 350))
 # player
 player = Player.Player(20, 40, screen, ground_rect.y)
 
-platform = Platform.Platform(360, 100, 100, 100, 20, screen)
+platform = Platform.Platform(300, 200, 100, 100, 20, screen)
 
-platform1 = Platform.Platform(550, 100, 100, 100, 20, screen)
+platform1 = Platform.Platform(440, 200, 100, 100, 20, screen)
 
-
+kupa = pygame.Rect(100, 350 - 338, 20, 338)
+platforms = [platform, platform1, platform, platform1, platform]
 
 while True:
     screen.fill("Black")
@@ -34,10 +35,12 @@ while True:
 
     screen.blit(ground, ground_rect)
 
-    platform1.platform_blit()
+    #platform1.platform_blit()
     platform.platform_blit()
-    player.update()
-    platform.colide(player)
-    platform1.colide(player)
+    platform1.platform_blit()
+    player.update(platforms)
+    pygame.draw.rect(screen, "Yellow", kupa)
+    #platform.colide(player)
+    #platform1.colide(player)
     clock.tick(60)
     pygame.display.update()
